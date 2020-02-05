@@ -55,18 +55,92 @@ bundle exec puma -p 4567 API_HOST=127.0.0.1:4568
 
 This will ensure they can all connect to each other.
 
-## Step 5 - Running remotely
+## Step 5 - Running remotely for the first time
 
 Now that you have tested it works locally, it is time to have it run on the cloud servers.
 
-*Replace `$REPO` with your own github repo (looks like `git@github.com:xumr0x/service-api-example.git`)*
-
-*Replace `$API_HOST` with the private address of your `service-api` droplet, you can find that with `doctl compute droplet list`*
+*Replace `$REPO` with your own github repo (looks like `git@github.com:.../service-api-example.git`)*
 
 ```bash
-# For service-api
-doctl compute ssh --ssh-command "git clone $REPO && cd service-api-example && bundle && rackup -p 80 DB_HOST=$DB_HOST DB_PASSWORD=$DB_PASSWORD"
-
 # For frontend
-doctl compute ssh --ssh-command "API_HOST=$API_HOST git clone $REPO && cd service-api-example && bundle && rackup -p 80"
+doctl compute ssh --ssh-command frontend-sinatra
+# switch to rails user
+sudo -i -u rails
+# grab your code for github
+git clone $REPO
+cd service-api-example/frontend-sinatra
+# install all your gems
+bundle
+# switch back to root user
+exit
+```
+
+Now you have your code on the server!
+
+The next step is to make sure the server is serving your code instead of the Example app.
+
+Since the app is started with `systemctl`, we need to edit the corresponding [unit file](https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units#editing-unit-files).
+
+```bash
+# As root user
+sudo systemctl edit --full rails.service
+```
+
+Edit the file like this:
+
+*Replace `$API_HOST` with the private address of your `service-api-sinatra` droplet, you can find that with `doctl compute droplet list`*
+
+```env
+[Unit]
+Description=FrontendApp
+Requires=network.target
+
+[Service]
+Type=simple
+User=rails
+Group=rails
+WorkingDirectory=/home/rails/service-api-example/frontend-sinatra
+ExecStart=/bin/bash -lc 'bundle exec puma'
+TimeoutSec=30s
+RestartSec=30s
+Restart=always
+Environment=API_HOST=$API_HOST
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Once you have it saved, reload and restart the service.
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl restart rails.service
+```
+
+Do the same thing for `service-api-sinatra` droplet **(with this unit file)**:
+
+```env
+[Unit]
+Description=ServiceAPIApp
+Requires=network.target
+
+[Service]
+Type=simple
+User=rails
+Group=rails
+WorkingDirectory=/home/rails/service-api-example/service-api-sinatra
+ExecStart=/bin/bash -lc 'bundle exec puma'
+TimeoutSec=30s
+RestartSec=30s
+Restart=always
+Environment=DB_HOST=$DB_HOST
+Environment=DB_PASSWORD=$DB_PASSWORD
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl restart rails.service
 ```
