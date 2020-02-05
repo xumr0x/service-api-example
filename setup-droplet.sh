@@ -20,6 +20,6 @@ sudo ufw default allow outgoing
 sudo ufw allow ssh
 sudo ufw allow http
 sudo ufw allow https
-sudo ufw enable
+sudo ufw --force enable
 
 echo -e "\e[35mDone.\e[0m"

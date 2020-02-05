@@ -55,10 +55,11 @@ ID           Name                   Public IPv4        Private IPv4      Public 
 
 ## Step 2 - Setup the droplets for running Sinatra
 
-SSH into your droplet (replace `$droplet_id` with the droplet id from `doctl compute droplet list`)
+SSH into your droplets
 
 ```bash
-doctl compute ssh $droplet_id
+doctl compute ssh frontend-sinatra
+doctl compute ssh service-api-sinatra
 ```
 
 Run the script `setup-droplet.sh`, this script will install Ruby and setup the firewall
@@ -77,7 +78,7 @@ Now you need a Postgres database:
 doctl database create postgres-sinatra --engine pg --region nyc3 --size db-s-1vcpu-1gb --version 11 --num-nodes 1
 ```
 
-*This step might takes a while to run...*
+**This step might takes a while to run...*
 
 You should see something like this:
 
