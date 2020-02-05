@@ -23,7 +23,7 @@ In this exercise, we will create a multi-server architecture for making a simple
 - DO command line tool `doctl`
   - Install: https://github.com/digitalocean/doctl#installing-doctl
 
-## Create Resources on DigitalOcean
+## Step 1 - Create Resources on DigitalOcean
 
 To create a droplet for Frontend named: "frontend-sinatra", replace `$fingerprint` below with your "fingerprint", and run this command:
 
@@ -53,7 +53,7 @@ ID           Name                   Public IPv4        Private IPv4      Public 
 178741737    service-api-sinatra    138.197.75.224     10.132.17.75                     1024      1        25      nyc3      Ubuntu 18.04.3 (LTS) x64    new               private_networking
 ```
 
-## Setup the droplets for running Sinatra
+## Step 2 - Setup the droplets for running Sinatra
 
 SSH into your droplet (replace `$droplet_id` with the droplet id from `doctl compute droplet list`)
 
@@ -61,15 +61,15 @@ SSH into your droplet (replace `$droplet_id` with the droplet id from `doctl com
 doctl compute ssh $droplet_id
 ```
 
-Install Ruby 2.6.5
+Run the script `setup-droplet.sh`, this script will install Ruby and setup the firewall
 
 ```bash
-chmod +x setup-ruby.sh && ./setup-ruby.sh
+chmod +x setup-droplet.sh && ./setup-droplet.sh
 ```
 
 Do this for both droplets.
 
-## Setup database on DigitalOcean
+## Step 3 - Setup database on DigitalOcean
 
 Now you need a Postgres database:
 
@@ -86,7 +86,7 @@ ID                                      Name                      Engine    Vers
 bd0e7e9f-01ba-40cf-a48f-defbdde78560    postgres-sinatra          pg        11         1                  nyc3      creating    db-s-1vcpu-1gb
 ```
 
-## Setup the connections between your droplets and database
+## Step 4 - Setup the connections between your droplets and database
 
 Go on https://cloud.digitalocean.com/databases and click on the database you just created ("postgres-sinatra")
 
@@ -100,7 +100,7 @@ Then click "Allow these inbound sources only".
 
 Now you should be able to access your database from your droplets and your laptop!
 
-## Connect to database from your laptop
+## Step 5 - Connect to database from your laptop
 
 Click "Connection details" then "Flags" to see the commands for connecting using `psql`
 
