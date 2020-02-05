@@ -47,10 +47,10 @@ To connect to the remote database, you should always run your apps like this:
 
 ```bash
 # For service-api, running on port 4568
-bundle exec puma -p 4568 DB_HOST=$DB_HOST DB_PASSWORD=$DB_PASSWORD
+DB_HOST=$DB_HOST DB_PASSWORD=$DB_PASSWORD bundle exec puma -p 4568
 
 # For frontend, running on port 4567
-bundle exec puma -p 4567 API_HOST=127.0.0.1:4568
+API_HOST=127.0.0.1 API_PORT=4568 bundle exec puma -p 4567
 ```
 
 This will ensure they can all connect to each other.
@@ -144,3 +144,7 @@ WantedBy=multi-user.target
 sudo systemctl daemon-reload
 sudo systemctl restart rails.service
 ```
+
+## Step 6 - Updating your app remotely
+
+...
