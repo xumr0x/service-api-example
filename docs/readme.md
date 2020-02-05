@@ -4,7 +4,7 @@ In this exercise, we will create a multi-server architecture for making a simple
 
 ## Flow
 
-<script>window.addEventListener("message", function(e) {var i = e.data.split(":")[1];var h = e.data.split(":")[2];if (e.data.split(":")[0] == "swimlanes-io" && i && h) {document.getElementById("__sw-io-" + i).setAttribute("style","height:" + h + "px");}}, false);</script><div id="__sw-io-K8kgA"><iframe style="border:none; width:100%; height:100%" scrolling="no" src="https://cdn.swimlanes.io/dist/embeded.html#K8ksyUm1UghOLSrLTE5VcAzwVHDLyS/ncivKzytJzUvRtUOSslJwdw1R0C8tTi0q5kIS17ULyC8uSS9KLQaaFOijEFiaWlTJBRNDMyIov7xYAWh8roKLE6ohMDutFEJBNkTHAgA=#K8kgA"></iframe></div>
+![flow](https://static.swimlanes.io/e86bed77d0258067e318c30e9f2c52fa.png)
 
 ## Architecture
 
