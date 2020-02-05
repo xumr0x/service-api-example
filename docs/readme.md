@@ -95,11 +95,11 @@ bd0e7e9f-01ba-40cf-a48f-defbdde78560    postgres-sinatra          pg        11  
 
 Go on https://cloud.digitalocean.com/databases and click on the database you just created ("postgres-sinatra")
 
-[Screen Shot 2020-02-04 at 13.51.24](images/Screen Shot 2020-02-04 at 13.51.24.png)
+![dashboard](images/db_dashboard.png)
 
 Click on "Add trusted sources" and select the two droplets, plus your laptop's ip.
 
-[Screen Shot 2020-02-04 at 13.58.08](images/Screen Shot 2020-02-04 at 13.58.08.png)
+![add trusted sources](images/db_add_trusted_source.png)
 
 Then click "Allow these inbound sources only".
 
@@ -109,6 +109,6 @@ Now you should be able to access your database from your droplets and your lapto
 
 Click "Connection details" then "Flags" to see the commands for connecting using `psql`
 
-[Screen Shot 2020-02-04 at 14.01.40](images/Screen Shot 2020-02-04 at 14.01.40.png)
+![connection details](images/db_connection_details.png)
 
 Run that command in terminal and you should be able to connect to the database.
