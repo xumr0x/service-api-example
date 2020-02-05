@@ -22,4 +22,14 @@ sudo ufw allow http
 sudo ufw allow https
 sudo ufw --force enable
 
+# install nginx
+echo -e "Installing nginx..."
+sudo apt install nginx -y -q
+
+echo -e "Setting up configurations for Puma..."
+mkdir -p shared/pids shared/sockets shared/log
+cd ~
+wget https://raw.githubusercontent.com/puma/puma/master/tools/jungle/upstart/puma-manager.conf
+wget https://raw.githubusercontent.com/puma/puma/master/tools/jungle/upstart/puma.conf
+
 echo -e "\e[35mDone.\e[0m"

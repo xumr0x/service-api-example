@@ -1,7 +1,8 @@
 # entry point
 require 'sinatra'
 
-# put your service-api droplet's private ip here.
+# retrieve your api host address like this
+#   settings.api => "someaddress.ondigitalocean.com"
 set :api, ENV['API_HOST']
 
 get '/' do
