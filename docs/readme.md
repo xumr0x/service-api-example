@@ -1,6 +1,6 @@
 # Service API instructions
 
-In this exercise, we want to create a multi-server architecture for making a simple app for creating and retrieve a list of users!
+In this exercise, we will create a multi-server architecture for making a simple app for creating and retrieving a list of users from the database!
 
 ## Flow
 
@@ -112,3 +112,5 @@ Click "Connection details" then "Flags" to see the commands for connecting using
 ![connection details](images/db_connection_details.png)
 
 Run that command in terminal and you should be able to connect to the database.
+
+### **Now your cloud architecture is all ready to go!** 🎉

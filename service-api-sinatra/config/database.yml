@@ -4,18 +4,28 @@ development:
   adapter: postgresql
   encoding: unicode
   database: s_api_dev
+  host: # db private address
+  port: # db private port
+  username: doadmin
+  password: # db password here
   pool: 2
 
 test:
   adapter: postgresql
   encoding: unicode
   database: s_api_test
+  host: # db private address
+  port: # db private port
+  username: doadmin
+  password: # db password here
   pool: 2
 
 production:
   adapter: postgresql
   encoding: unicode
   database: s_api_prod
+  host: # db private address
+  port: # db private port
+  username: doadmin
+  password: # db password here
   pool: 2
-  username: your_username
-  password: your_password
