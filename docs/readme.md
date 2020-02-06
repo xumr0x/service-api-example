@@ -6,6 +6,8 @@ In this tutorial, we will create a multi-server architecture for making a simple
 
 ### [Part 2 - Setting up your Sinatra app](sinatra.md)
 
+### [Part 3 - Setting up CI/CD](cicd.md)
+
 ## Flow
 
 ![flow](https://static.swimlanes.io/e86bed77d0258067e318c30e9f2c52fa.png)

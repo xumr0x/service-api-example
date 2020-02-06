@@ -47,15 +47,16 @@ rake db:migrate DB_HOST=$DB_HOST DB_PASSWORD=$DB_PASSWORD RACK_ENV=development
 
 ![frontend](images/frontend.png)
 
-- Homepage
-  - This page should show the following things:
-    - Table of all users
-    - Total number of users
-    - A field that takes in a number (for generating users)
-    - A "generate" button that send a `POST` request to `http://API_HOST/users` for generating more users.
-    - A "refresh" button for getting the current user table
-      - `<a href="/">Refresh</a>`
-  - Hint: use `Net::HTTP.get` to call your service API
+Homepage
+
+- This page should show the following things:
+  - Table of all users
+  - Total number of users
+  - A field that takes in a number (for generating users)
+  - A "generate" button that send a `POST` request to `http://API_HOST/users` for generating more users.
+  - A "refresh" button for getting the current user table
+    - `<a href="/">Refresh</a>`
+- Hint: use `Net::HTTP.get` to call your service API
 
 ## Step 4 - Running locally
 
@@ -133,6 +134,23 @@ sudo systemctl daemon-reload
 sudo systemctl restart rails.service
 ```
 
+You should something like this for successful config:
+
+```bash
+root@frontend-sinatra: sudo systemctl status rails.service
+● rails.service - FrontendApp
+   Loaded: loaded (/etc/systemd/system/rails.service; enabled; vendor preset: enabled)
+   Active: active (running) since Thu 2020-02-06 19:11:49 UTC; 6min ago
+ Main PID: 30056 (ruby)
+    Tasks: 10 (limit: 1152)
+   CGroup: /system.slice/rails.service
+           └─30056 puma 4.3.1 (tcp://0.0.0.0:3000) [frontend-sinatra]
+
+Feb 06 19:12:11 frontend-sinatra bash[30056]: 129.64.0.33 - - [06/Feb/2020:19:12:11 +0000]
+Feb 06 19:12:13 frontend-sinatra bash[30056]: 129.64.0.33 - - [06/Feb/2020:19:12:13 +0000]
+Feb 06 19:12:16 frontend-sinatra bash[30056]: 129.64.0.33 - - [06/Feb/2020:19:12:16 +0000]
+```
+
 Do the same thing for `service-api-sinatra` droplet **(with this unit file)**:
 
 ```env
@@ -161,6 +179,6 @@ sudo systemctl daemon-reload
 sudo systemctl restart rails.service
 ```
 
-## Step 6 - Updating your app remotely
+### **Now your app is live!** 🎉
 
-...
+### Go to [Part 3](cicd.md)

@@ -110,3 +110,5 @@ Click "Connection details" then "Flags" to see the commands for connecting using
 Run that command in terminal and you should be able to connect to the database.
 
 ### **Now your cloud architecture is all ready to go!** 🎉
+
+### Go to [Part 2](sinatra.md)
