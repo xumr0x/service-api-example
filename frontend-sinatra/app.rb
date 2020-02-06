@@ -6,6 +6,7 @@ require 'sinatra'
 set :api, ENV['API_HOST']
 set :api_port, ENV['API_PORT'] || 80
 
+# Show a pretty table of all users... rendered on a html page.
 get '/' do
   'Implement me!'
 end

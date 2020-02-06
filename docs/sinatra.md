@@ -30,16 +30,30 @@ rake db:migrate DB_HOST=$DB_HOST DB_PASSWORD=$DB_PASSWORD RACK_ENV=development
 
 ## Step 2 - Implement Service API
 
-- Implement the route `get '/users'`
+- Implement `GET /users`
   - This route is responsible for returning all the users in the database
   - It should returns an array of users in `json` format
-  - And a `200 OK` back to the caller
+  - Don't leak the user's password!!
+
+- Implement `POST /users?n=10`
+  - This route is responsible for creating fake users in the database
+  - It should take a query parameter `n` which denotes the number of users to be created
+  - If no parameter was given, create 1 user.
+  - Returns a `200 OK` back to the caller if it was successful
+  - Returns a `400 Bad Request` if the caller requests more than 30!
+  - Hint: use [faker](https://github.com/faker-ruby/faker) to generate random data
 
 ## Step 3 - Implement Frontend
 
-- Implement the route `get '/'`
-  - This route is responsible for calling `http://API_HOST/users` and displaying the results in a nicely formatted table on a html page
-  - On the top of the page, it should display the total number of users in the database
+- Homepage
+  - This page should show the following things:
+    - Table of all users
+    - Total number of users
+    - A field that takes in a number (for generating users)
+    - A "generate" button that send a `POST` request to `http://API_HOST/users` for generating more users.
+    - A "refresh" button for getting the current user table
+      - `<button onClick="window.location.reload();">Refresh</button>`
+  - Hint: use `Net::HTTP.get` to call your service API
 
 ## Step 4 - Running locally
 
@@ -59,7 +73,7 @@ This will ensure they can all connect to each other.
 
 Now that you have tested it works locally, it is time to have it run on the cloud servers.
 
-*Replace `$REPO` with your own github repo (looks like `git@github.com:.../service-api-example.git`)*
+*Replace `$REPO` with your own github repo (looks like `https://github.com/.../service-api-example.git`)*
 
 ```bash
 # For frontend
