@@ -45,6 +45,8 @@ rake db:migrate DB_HOST=$DB_HOST DB_PASSWORD=$DB_PASSWORD RACK_ENV=development
 
 ## Step 3 - Implement Frontend
 
+![frontend](images/frontend.png)
+
 - Homepage
   - This page should show the following things:
     - Table of all users
@@ -52,7 +54,7 @@ rake db:migrate DB_HOST=$DB_HOST DB_PASSWORD=$DB_PASSWORD RACK_ENV=development
     - A field that takes in a number (for generating users)
     - A "generate" button that send a `POST` request to `http://API_HOST/users` for generating more users.
     - A "refresh" button for getting the current user table
-      - `<button onClick="window.location.reload();">Refresh</button>`
+      - `<a href="/">Refresh</a>`
   - Hint: use `Net::HTTP.get` to call your service API
 
 ## Step 4 - Running locally
