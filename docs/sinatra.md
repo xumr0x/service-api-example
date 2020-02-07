@@ -39,9 +39,14 @@ rake db:migrate DB_HOST=$DB_HOST DB_PASSWORD=$DB_PASSWORD RACK_ENV=development
   - This route is responsible for creating fake users in the database
   - It should take a query parameter `n` which denotes the number of users to be created
   - If no parameter was given, create 1 user.
-  - Returns a `200 OK` back to the caller if it was successful
-  - Returns a `400 Bad Request` if the caller requests more than 30!
+  - Returns a `200 OK` if it was successful
+  - Returns a `400 Bad Request` if requested more than 30!
   - Hint: use [faker](https://github.com/faker-ruby/faker) to generate random data
+
+- Implement `POST /users/destroy`
+  - This route is responsible for removing every user in the database if called.
+  - Returns a `200 OK` if it was successful
+  - Returns a `500 Internal Error` if it failed
 
 ## Step 3 - Implement Frontend
 
@@ -56,7 +61,9 @@ Homepage
   - A "generate" button that send a `POST` request to `http://API_HOST/users` for generating more users.
   - A "refresh" button for getting the current user table
     - `<a href="/">Refresh</a>`
-- Hint: use `Net::HTTP.get` to call your service API
+  - A "destroy" button for removing all the user in the database
+    - Does a `POST` to `http://API_HOST/users/destroy`
+- Hint: use `Net::HTTP.get` or `xhttp` to call your service API
 
 ## Step 4 - Running locally
 

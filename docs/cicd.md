@@ -2,6 +2,10 @@
 
 It is cumbersome to have to ssh into your droplets to update your app everything. We want to be able to just push the code, and the app will be updated automagically.
 
+## Prerequisites
+
+- You must complete part 1 and 2 first
+
 ## Step 1 - Setup Github Actions file
 
 We are going to use Github Actions to setup our continuous deployment pipeline.
@@ -106,5 +110,13 @@ git push
 You should see the pipeline running under `Actions`
 
 ![pipeline](images/pipeline.png)
+
+Once it finish you should be able to see the updated site at http://frontend-sinatra/
+
+**To see the logs of any of your apps**
+
+```bash
+doctl compute ssh service-api-sinatra --ssh-command "journalctl -u rails.service -e -f"
+```
 
 ### **Congrats! You now have a auto-deploying pipeline!** 🎉
