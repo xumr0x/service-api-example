@@ -99,7 +99,7 @@ bundle
 exit
 ```
 
-Now you have your code on the server!
+Now your code is on the server!
 
 The next step is to make sure the server is serving your code instead of the Example app.
 
@@ -159,6 +159,10 @@ Feb 06 19:12:16 frontend-sinatra bash[30056]: 129.64.0.33 - - [06/Feb/2020:19:12
 ```
 
 Do the same thing for `service-api-sinatra` droplet **(with this unit file)**:
+
+*Replace `$DB_HOST` with the public address of the database (looks something like this: `postgres-sinatra...db.ondigitalocean.com`)*
+
+*Replace `$DB_PASSWORD` with the database `doadmin` user password*
 
 ```env
 [Unit]

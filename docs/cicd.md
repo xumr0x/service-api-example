@@ -1,6 +1,6 @@
 # Service API tutorial - CI/CD
 
-It is cumbersome to have to ssh into your droplets to update your app everything. We want to be able to just push the code, and the app will be updated automagically.
+It is cumbersome to have to ssh into your droplets to update your app every time. We want to be able to just push the code, and the app will be updated automagically.
 
 ## Prerequisites
 
