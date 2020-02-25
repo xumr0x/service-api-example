@@ -87,7 +87,7 @@ Now that you have tested it works locally, it is time to have it run on the clou
 
 ```bash
 # For frontend
-doctl compute ssh --ssh-command frontend-sinatra
+doctl compute ssh frontend-sinatra
 # switch to rails user
 sudo -i -u rails
 # grab your code for github
