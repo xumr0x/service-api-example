@@ -45,23 +45,6 @@ Go on your droplet's public IP with your browser, you should see something like 
 
 ![rails](images/rails.png)
 
-<!-- ## Step 2 - Setup the droplets for running Sinatra
-
-SSH into your droplets
-
-```bash
-doctl compute ssh frontend-sinatra
-doctl compute ssh service-api-sinatra
-```
-
-Run the script `setup-droplet.sh`, this script will install Ruby and setup the firewall
-
-```bash
-chmod +x setup-droplet.sh && ./setup-droplet.sh
-```
-
-Do this for both droplets. -->
-
 ## Step 2 - Setup database on DigitalOcean
 
 Now you need a Postgres database:
