@@ -1,0 +1,4 @@
+# Configuration file for rclient
+host: <%= ENV['REGISTRY_HOST'] %>
+port: <%= ENV['REGISTRY_PORT'] %>
+password: <%= ENV['REGISTRY_PASSWORD'] %>
