@@ -2,8 +2,6 @@
 
 # In this file you need to implement a registry client.
 
-require_relative 'config/config'
-
 # RegistryClient is a registry client that talks to a Redis service registry.
 # It has two core functions:
 #   - Register itself to the registry when the service is up.
@@ -31,8 +29,8 @@ class RegistryClient
   # Second, it needs to re-register itself every 30 seconds via `SET ...`
   # (in the background) to the registry to *prove* that this service is still
   # alive.
-  # If the registry does not hear back from this service within this time period
-  # , it will declare this service *dead*.
+  # If the registry does not hear back from this service within this time
+  # period, it will be declared *dead*.
   #
   # This is what happens in Redis,
   #   // An instance running Service A registers itself.
@@ -49,6 +47,26 @@ class RegistryClient
     raise 'not implemented'
   end
 
+  # Service() returns the address of an instance running a given service.
+  #
+  # Internally, the client first asks for the list of instances running
+  # a particular service. Then, it picks one of the instances (ip addresses)
+  # using a load balancing strategy.
+  # Before returning the address, it checks if the address is still *alive*
+  # via `EXISTS ...`.
+  # If it is alive, return the address. Otherwise, picks another address.
+  #
+  # This is what happens in Redis,
+  #   // Lookup instances running serviceA.
+  #   SMEMBERS serviceA
+  #     1) "10.10.10.3:4567"
+  #     2) "10.10.10.1:4567"
+  #     3) "10.10.10.2:4567"
+  #   // Pick an instance and checks if it is alive.
+  #   EXISTS 10.10.10.1:4567
+  #     (integer) 1   // it is alive!!
+  #
+  # @param name serviceName
   def service(name:)
     raise 'not implemented'
   end

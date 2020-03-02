@@ -6,11 +6,13 @@ In this tutorial, we will create a multi-server architecture for making a simple
 
 ## Start here
 
-### [Part 1 - Setting up your cloud architecture](docs/cloud.md)
+### [Part 1 - Cloud architecture](docs/cloud.md)
 
-### [Part 2 - Setting up your Sinatra app](docs/sinatra.md)
+### [Part 2 - Sinatra app](docs/sinatra.md)
 
-### [Part 3 - Setting up CI/CD](docs/cicd.md)
+### [Part 3 - CI/CD](docs/cicd.md)
+
+### [Part 4 - Service Discovery](docs/discovery.md)
 
 ## Flow
 
