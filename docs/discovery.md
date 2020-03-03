@@ -41,6 +41,8 @@ Create a droplet on DigitalOcean (1gb should be good enough) using the Ubuntu 18
 
 Follow [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-18-04) to install redis on the droplet.
 
+**PLEASE SET A PASSWORD FOR REDIS, YOUR DROPLET IS EXPOSED TO THE INTERNET**
+
 ## Step 2 - Create a registry client
 
 *Navigate to `registry-client/client.rb`.*
