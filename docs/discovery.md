@@ -96,9 +96,9 @@ EXISTS 10.10.10.1:4567
 
 As for the load balancing strategy, feel free to implement any one you want: [resource](https://www.nginx.com/resources/glossary/load-balancing/)
 
-Extra: Retry Mechanism
+### Extra: Retry Mechanism
 
-Have you ever wondered what will happen when the service set is empty? i.e `SMEMBERS serviceB returns (empty list or set)` How do you handle this situation?
+Have you ever wondered what will happen if the service set is empty? i.e `SMEMBERS serviceB returns (empty list or set)` How do you handle this situation?
 
 Well, you have two options. Option 1, you can fail the request immediately, meaning you can't find any suitable service instances. But this is not good, what if a service instance comes back online right after you failed to request? If you waited *one more second* you could have returned successfully.
 
