@@ -45,6 +45,8 @@ Follow [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-i
 
 ## Step 2 - Create a registry client
 
+*Navigate to `registry-client/client.rb`.*
+
 There are two core functions as a registry client:
 - Register itself to the service registry when the service is up.
 - Query the registry for addresses of services that it wants to talk to.
@@ -65,6 +67,13 @@ SET 10.10.10.11:4567 "alive" EX 30
 # Another instance running Service A registers itself.
 SADD serviceA "45.21.34.12:4567"
 SET 45.21.34.12:4567 "alive" EX 30
+
+# Every 30 seconds...
+SET 10.10.10.11:4567 "alive" EX 30
+SET 45.21.34.12:4567 "alive" EX 30
+SET 10.10.10.11:4567 "alive" EX 30
+SET 45.21.34.12:4567 "alive" EX 30
+...
 ```
 
 ### Service()
@@ -85,7 +94,22 @@ EXISTS 10.10.10.1:4567
 (integer) 1   # it is alive!!
 ```
 
-As for the load balancing strategy, you are free to implement anything you want: [resource](https://www.nginx.com/resources/glossary/load-balancing/)
+As for the load balancing strategy, feel free to implement any one you want: [resource](https://www.nginx.com/resources/glossary/load-balancing/)
+
+Extra: Retry Mechanism
+
+Have you ever wondered what will happen when the service set is empty? i.e `SMEMBERS serviceB returns (empty list or set)` How do you handle this situation?
+
+Well, you have two options. Option 1, you can fail the request immediately, meaning you can't find any suitable service instances. But this is not good, what if a service instance comes back online right after you failed to request? If you waited *one more second* you could have returned successfully.
+
+Option 2, retry immediately if you can't find any suitable service instances. But this is also *no bueno*. Why? Because how do you know how long you have to retry for? And how frequently should you retry (you don't want to DDOS our service registry)?
+
+Turns out this is very common problem in designing a distributed system. Here are some proposed solutions, they all have some pros and cons:
+- [Exponential Backoff](https://en.wikipedia.org/wiki/Exponential_backoff)
+- [Circuit Breaker](https://martinfowler.com/bliki/CircuitBreaker.html)
+- [Azure's retry best practice](https://docs.microsoft.com/en-us/azure/architecture/best-practices/transient-faults)
+
+You need to implement one of the above strategies or create your own retry mechanism. Hint: use [Ruby's `retry`](https://ruby-doc.org/docs/keywords/1.9/Object.html#method-i-retry) for ease.
 
 ## Step 3 - Integrate to existing services
 
@@ -95,5 +119,29 @@ Now that you have a working registry client, it is time to put it to use.
   - For instance: `client.service('backend-service')` will return `10.10.10.3:4567`
 - Register itself on every service with `client.register(...)`
   - For instance: `client.register('backend-service', '10.10.10.3', 4567)`
+  - Hint: ruby's [Socket](https://ruby-doc.org/stdlib-2.5.3/libdoc/socket/rdoc/Socket.html#method-c-ip_address_list)
+- Modify `rails.service` unit file in your two droplets to match the new changes
+  - For instance:
+    ```
+    [Unit]
+    Description=FrontendApp
+    Requires=network.target
+
+    [Service]
+    Type=simple
+    User=rails
+    Group=rails
+    WorkingDirectory=/home/rails/service-api-example/frontend-sinatra
+    ExecStart=/bin/bash -lc 'bundle exec puma'
+    TimeoutSec=30s
+    RestartSec=30s
+    Restart=always
+    Environment=REGISTRY_HOST=10.10.10.1
+    Environment=REGISTRY_PORT=6379
+    Environment=REGISTRY_PASSWORD=iloveredis
+
+    [Install]
+    WantedBy=multi-user.target
+    ```
 
 ### **Now your cloud architecture is running with service discovery!!** 🎉
