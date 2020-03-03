@@ -10,8 +10,10 @@ module RegistryClient
   #   - Register itself to the registry when the service is up.
   #   - Query the registry for addresses of services that it wants to talk to.
   #
-  # To create a new RegistryClient::Client
+  # Example use:
+  #   require_relative '../registry-client/client.rb'
   #   client = RegistryClient::Client.new(RegistryClient::Config.new)
+  #   service_api = client.service('service-api')
   #
   # @param config <tt>RegistryClient::Config</tt>
   class Client
@@ -63,6 +65,7 @@ module RegistryClient
     # Before returning the address, it checks if the address is still *alive*
     # via `EXISTS ...`.
     # If it is alive, return the address. Otherwise, picks another address.
+    # Throws an Exception if no suitable address is found.
     #
     # This is what happens in Redis,
     #   // Lookup instances running serviceA.

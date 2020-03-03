@@ -22,7 +22,7 @@ However, this structure raises a couple questions:
 - What happens if we want more than 1 frontend and 1 backend services? How do we connect them together then?
 - What happens if we one of the backend services is down and we need to redeploy it, do we have to change the address in all our frontend code as well?
 
-Moreover as we scale, we want to be able to add and remove services dynamically depending on the load. For instance, we want to have 3 backend services and 2 frontend services at peak traffic, and only 1 frontend and backend services at normal load. This raises another question:
+As we scale, we want to be able to add and remove services dynamically depending on the load. For instance, we want to have 3 backend services and 2 frontend services at peak traffic, and only 1 frontend and backend services at normal load. This raises another question:
 - How do we balance traffic between services so that they receive a equal amount of work?
 
 ![why](images/why_service_discovery.png)
@@ -78,7 +78,7 @@ SET 45.21.34.12:4567 "alive" EX 30
 
 ### Service()
 
-Service() returns the address of an instance running a given service. Internally, the client first asks for the list of instances running a particular service. Then, it picks one of the instances (ip addresses) using a load balancing strategy. Before returning the address, it checks if the address is still *alive* via `EXISTS ...`. If it is alive, return the address. Otherwise, picks another address.
+Service() returns the address of an instance running a given service. Internally, the client first asks for the list of instances running a particular service. Then, it picks one of the instances (ip addresses) using a load balancing strategy. Before returning the address, it checks if the address is still *alive* via `EXISTS ...`. If it is alive, return the address. Otherwise, picks another address. Throws an Exception if no suitable address is found.
 
 This is what happens in Redis,
 
