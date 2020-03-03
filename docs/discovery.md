@@ -10,17 +10,15 @@
 
 ## What is Service Discovery?
 
-In the previous parts we created a frontend webpage that display/modify data by communicating with a backend service. But how does the frontend know where and which backend service to reach out to? How does two services connect with each other?
-
-The simplest way to connect each services is to give them each IP addresses of each other. For instance, the frontend is given the address of the backend, and the backend is given the address of the database.
+In the previous parts we created a frontend webpage that display/modify data by communicating with a backend service. We connected the two services using the simplest way: we gave them IP addresses of each other. For instance, the frontend is given the address of the backend, and the backend is given the address of the database.
 
 Like this:
 
 ![simple structure](images/simple_service_structure.jpeg)
 
-However, this structure raises a couple questions:
+However, this structure has a number of issues:
 - What happens if we want more than 1 frontend and 1 backend services? How do we connect them together then?
-- What happens if we one of the backend services is down and we need to redeploy it, do we have to change the address in all our frontend code as well?
+- What happens if one of the backend services is down and we need to redeploy it, do we have to change the address in all our frontend code as well?
 
 As we scale, we want to be able to add and remove services dynamically depending on the load. For instance, we want to have 3 backend services and 2 frontend services at peak traffic, and only 1 frontend and backend services at normal load. This raises another question:
 - How do we balance traffic between services so that they receive a equal amount of work?
@@ -96,7 +94,7 @@ EXISTS 10.10.10.1:4567
 
 As for the load balancing strategy, feel free to implement any one you want: [resource](https://www.nginx.com/resources/glossary/load-balancing/)
 
-### Extra: Retry Mechanism
+### Retry Mechanism
 
 Have you ever wondered what will happen if the service set is empty? i.e `SMEMBERS serviceB returns (empty list or set)` How do you handle this situation?
 
@@ -110,6 +108,21 @@ Turns out this is very common problem in designing a distributed system. Here ar
 - [Azure's retry best practice](https://docs.microsoft.com/en-us/azure/architecture/best-practices/transient-faults)
 
 You need to implement one of the above strategies or create your own retry mechanism. Hint: use [Ruby's `retry`](https://ruby-doc.org/docs/keywords/1.9/Object.html#method-i-retry) for ease.
+
+### Optional: Caching
+
+*This part is optional.*
+
+You might have notice one issue with our current design: every time one service wants to talk to another, it needs to ask the service registry first. If say your frontend receive 1,000 request per second (RPS), your service registry will receive 1,000 requests, and that's only accounting for *one* frontend instance.
+
+We need to implement some kind of caching mechanism in the client so that it doesn't harass the service registry that frequently. Now, please implement a caching mechanism to reduce calls.
+
+By now you should have implemented a caching mechanism, likely using `hash`. Here comes a small problem:
+- What happens if an address you cached is no longer reachable?
+
+Here comes a bigger problem:
+- By caching, did you just completely messed up your load balancing strategy? How do you make sure, with caching, your load balancing strategy is still correct?
+- How do you make sure your cache is consistent with the data in the service registry (race condition)?
 
 ## Step 3 - Integrate to existing services
 

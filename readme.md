@@ -4,6 +4,8 @@
 
 In this tutorial, we will create a multi-server architecture for making a simple app for creating and retrieving a list of users from the database!
 
+*This is originally made for [COSI 105b: Software Engineering for Scalability](http://cosi105b.s3-website-us-west-2.amazonaws.com/) @ Brandeis University under Professor Pito Salas.*
+
 ## Start here
 
 ### [Part 1 - Cloud architecture](docs/cloud.md)
