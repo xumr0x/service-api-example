@@ -120,3 +120,5 @@ doctl compute ssh service-api-sinatra --ssh-command "journalctl -u rails.service
 ```
 
 ### **Congrats! You now have a auto-deploying pipeline!** 🎉
+
+### Go to [Part 4](discovery.md)

@@ -1,4 +1,4 @@
-# Service API tutorial [![Maintainability](https://api.codeclimate.com/v1/badges/ebbeabc3903af95477b7/maintainability)](https://codeclimate.com/github/hojulian/service-api-example/maintainability)
+# Service API tutorial [![Maintainability](https://api.codeclimate.com/v1/badges/df2e641b05b3d31eeb4d/maintainability)](https://codeclimate.com/github/hojulian/service-api-example/maintainability)
 
 ![web](docs/images/frontend.png)
 
