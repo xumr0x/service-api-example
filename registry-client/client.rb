@@ -18,14 +18,15 @@ module RegistryClient
   #       host: config.host,
   #       port: config.port,
   #       password: config.password
-  #     )
+  #     ), config
   #   )
   #   service_api = client.service('service-api')
   #
   # @param config <tt>RegistryClient::Config</tt>
   class Client
-    def initialize(redis_client)
+    def initialize(redis_client, config)
       @client = redis_client
+      @config = config
     end
 
     # Register registers itself to the Service Registry.
@@ -56,7 +57,7 @@ module RegistryClient
     # @param name serviceName
     # @param host ip v4 address
     # @param port
-    def register(name, host, port)
+    def register(_name, _host, _port)
       raise 'not implemented'
     end
 
@@ -81,7 +82,7 @@ module RegistryClient
     #     (integer) 1   // it is alive!!
     #
     # @param name serviceName
-    def service(name)
+    def service(_name)
       raise 'not implemented'
     end
   end

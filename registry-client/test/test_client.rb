@@ -21,11 +21,14 @@ class TestClient < Minitest::Test
     r.sadd('serviceA', '10.10.0.1:4567')
     r.set('10.10.0.1:4567', 'alive')
 
+    # Configure.
+    c = RegistryClient::Config.new
+
     service_name = 'serviceA'
     expected = '10.10.0.1:4567'
 
     # Query the Service Registry to retrieve address.
-    client = RegistryClient::Client.new(r)
+    client = RegistryClient::Client.new(r, c)
     got = client.service(service_name)
     assert expected == got
   end

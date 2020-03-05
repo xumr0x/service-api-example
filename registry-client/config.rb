@@ -5,8 +5,7 @@ require 'yaml'
 module RegistryClient
   # Config represents configurations for the Registry Client.
   class Config
-    def initialize(path)
-      path ||= 'config.yml'
+    def initialize(path = 'config.yml')
       @config = YAML.safe_load File.read(path)
     end
 
