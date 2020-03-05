@@ -6,10 +6,10 @@
 - Redis installed locally
   - [https://redis.io/download](https://redis.io/download)
   - You can use `brew install redis` on Mac
-- Latest version of [https://github.com/xumr0x/service-api-example](https://github.com/xumr0x/service-api-example)
+- Latest version of [https://github.com/hojulian/service-api-example](https://github.com/hojulian/service-api-example)
   - If you have forked this repo before, you need to sync the fork. Here are the instructions:
 
-    1. Add this repo as upstream: `git remote add upstream https://github.com/xumr0x/service-api-example`
+    1. Add this repo as upstream: `git remote add upstream https://github.com/hojulian/service-api-example`
     2. Fetch the latest changes: `git fetch upstream`
     3. Go to your local `master` branch: `git checkout master`
     4. Merge the latest updates into your `master` branch `git merge upstream/master`
@@ -175,7 +175,21 @@ Here comes a bigger problem:
 - By caching, did you just completely messed up your load balancing strategy? How do you make sure, with caching, your load balancing strategy is still correct?
 - How do you make sure your cache is consistent with the data in the service registry (race condition)?
 
-## Step 3 - Integrate to existing services
+## Step 3 - Unit testing
+
+It is essential that the client is well tested before integrating to existing services. In the folder `./test` you can find a test file with one of test cases already written up.
+
+You might noticed there is a gem named `mock_redis` included in the test. `mock_redis` is a fake redis database that you can interact with like a *real* redis database without actually connecting to anywhere. It pretends to be a redis database, i.e. returning the same responses just as a real one would.
+
+In this step you need to test both methods (`register()` and `service()`), think about what are the scenarios that can happen. Here are some hint:
+
+- Multiple instances registering for one service ('serviceA')
+- An instance running a service going offline
+- No instances found for a service (all dead/offline)
+- Testing load balancing correctness
+- And more ...
+
+## Step 4 - Integrate to existing services
 
 Now that you have a working registry client, it is time to put it to use.
 
