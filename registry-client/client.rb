@@ -12,17 +12,20 @@ module RegistryClient
   #
   # Example use:
   #   require_relative '../registry-client/client.rb'
-  #   client = RegistryClient::Client.new(RegistryClient::Config.new)
+  #   config = RegistryClient::Config.new('config.yml')
+  #   client = RegistryClient::Client.new(
+  #     Redis.new(
+  #       host: config.host,
+  #       port: config.port,
+  #       password: config.password
+  #     )
+  #   )
   #   service_api = client.service('service-api')
   #
   # @param config <tt>RegistryClient::Config</tt>
   class Client
-    def initialize(config)
-      @client = Redis.new(
-        host: config.host,
-        port: config.port,
-        password: config.password
-      )
+    def initialize(redis_client)
+      @client = redis_client
     end
 
     # Register registers itself to the Service Registry.
