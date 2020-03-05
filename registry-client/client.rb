@@ -56,7 +56,7 @@ module RegistryClient
     # @param name serviceName
     # @param host ip v4 address
     # @param port
-    def register(name:, host:, port:)
+    def register(name, host, port)
       raise 'not implemented'
     end
 
@@ -81,7 +81,7 @@ module RegistryClient
     #     (integer) 1   // it is alive!!
     #
     # @param name serviceName
-    def service(name:)
+    def service(name)
       raise 'not implemented'
     end
   end
