@@ -11,25 +11,30 @@ require_relative '../client.rb'
 # As an example, one test case for service() has been given to you.
 # Note: You need at least 3 test cases each for service() and register().
 class TestClient < Minitest::Test
-  def test_register
-    # Test register here.
+  # Test register here.
+  describe 'test service register' do
+    it 'registering 1 service' do
+
+    end
   end
 
-  def test_one_service_one_instance
-    # Setup Redis with records.
-    r = MockRedis.new
-    r.sadd('serviceA', '10.10.0.1:4567')
-    r.set('10.10.0.1:4567', 'alive')
+  describe 'test service discovery' do
+    it '1 service running on 1 instance' do
+      # Setup Redis with records.
+      r = MockRedis.new
+      r.sadd('serviceA', '10.10.0.1:4567')
+      r.set('10.10.0.1:4567', 'alive')
 
-    # Configure.
-    c = RegistryClient::Config.new
+      # Load configs.
+      c = RegistryClient::Config.new
 
-    service_name = 'serviceA'
-    expected = '10.10.0.1:4567'
+      service_name = 'serviceA'
+      expected = '10.10.0.1:4567'
 
-    # Query the Service Registry to retrieve address.
-    client = RegistryClient::Client.new(r, c)
-    got = client.service(service_name)
-    assert expected == got
+      # Query the Service Registry to retrieve address.
+      client = RegistryClient::Client.new(r, c)
+      got = client.service(service_name)
+      assert expected == got
+    end
   end
 end
