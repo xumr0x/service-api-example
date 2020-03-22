@@ -5,7 +5,7 @@ require 'minitest/autorun'
 # For mocking Redis.
 require 'mock_redis'
 
-require_relative '../client.rb'
+require_relative '../lib/client.rb'
 
 # Please write tests for your RegistryClient code.
 # As an example, one test case for service() has been given to you.
@@ -14,7 +14,6 @@ class TestClient < Minitest::Test
   # Test register here.
   describe 'test service register' do
     it 'registering 1 service' do
-
     end
   end
 
@@ -26,7 +25,7 @@ class TestClient < Minitest::Test
       r.set('10.10.0.1:4567', 'alive')
 
       # Load configs.
-      c = RegistryClient::Config.new
+      c = RegistryClient::Config.new('lib/config.yml')
 
       service_name = 'serviceA'
       expected = '10.10.0.1:4567'

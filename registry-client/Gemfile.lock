@@ -1,3 +1,8 @@
+PATH
+  remote: .
+  specs:
+    registry-client (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -12,6 +17,7 @@ DEPENDENCIES
   minitest
   mock_redis
   redis
+  registry-client!
 
 BUNDLED WITH
    2.1.4

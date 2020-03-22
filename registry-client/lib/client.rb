@@ -11,7 +11,8 @@ module RegistryClient
   #   - Query the registry for addresses of services that it wants to talk to.
   #
   # Example use:
-  #   require_relative '../registry-client/client.rb'
+  #   require 'registry-client'
+  #
   #   config = RegistryClient::Config.new('config.yml')
   #   client = RegistryClient::Client.new(
   #     Redis.new(
@@ -20,6 +21,7 @@ module RegistryClient
   #       password: config.password
   #     ), config
   #   )
+  #
   #   service_api = client.service('service-api')
   #
   # @param config <tt>RegistryClient::Config</tt>
