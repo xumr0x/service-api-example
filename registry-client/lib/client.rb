@@ -14,20 +14,21 @@ module RegistryClient
   #   require 'registry-client'
   #
   #   config = RegistryClient::Config.new('config.yml')
-  #   client = RegistryClient::Client.new(
-  #     Redis.new(
-  #       host: config.host,
-  #       port: config.port,
-  #       password: config.password
-  #     ), config
-  #   )
+  #   client = RegistryClient::Client.new(config: config)
   #
   #   service_api = client.service('service-api')
   #
   # @param config <tt>RegistryClient::Config</tt>
   class Client
-    def initialize(redis_client, config)
-      @client = redis_client
+    def initialize(config: nil, client: nil)
+      if client.nil?
+        client = Redis.new(
+          host: config.host,
+          port: config.port,
+          password: config.password
+        )
+      end
+      @client = client
       @config = config
     end
 

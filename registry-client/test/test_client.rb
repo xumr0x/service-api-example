@@ -31,7 +31,7 @@ class TestClient < Minitest::Test
       expected = '10.10.0.1:4567'
 
       # Query the Service Registry to retrieve address.
-      client = RegistryClient::Client.new(r, c)
+      client = RegistryClient::Client.new(config: c, client: r)
       got = client.service(service_name)
       assert expected == got
     end
