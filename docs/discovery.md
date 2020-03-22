@@ -199,7 +199,7 @@ Now that you have a working registry client, it is time to put it to use.
   ```Gemfile
   # Add the following line to the file.
   # Replace the `git` with your own repo.
-  gem 'registry-client', git: 'https://github.com/hojulian/service-api-example.git', branch: 'master', glob: 'registry-client/*.gemspec'
+  gem 'registry_client', git: 'https://github.com/hojulian/service-api-example.git', branch: 'master', glob: 'registry-client/*.gemspec'
   ```
 
 - Replace all environment variables lookups with `client.service(...)`

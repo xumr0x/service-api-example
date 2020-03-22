@@ -3,7 +3,7 @@
 require_relative 'lib/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'registry-client'
+  spec.name          = 'registry_client'
   spec.summary       = 'Registry client for using Redis as Service Registry.'
   spec.authors       = ['Author']
   spec.version       = RegistryClient::VERSION
