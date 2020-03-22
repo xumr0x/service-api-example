@@ -89,7 +89,7 @@ Follow [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-i
 
 ## Step 2 - Create a registry client
 
-*Navigate to `registry-client/client.rb`.*
+*Navigate to `registry-client/lib/client.rb`.*
 
 There are two core functions as a registry client:
 
