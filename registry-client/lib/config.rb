@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 require 'yaml'
+require 'erb'
 
 module RegistryClient
   # Config represents configurations for the Registry Client.
   class Config
     def initialize(path = 'config.yml')
-      @config = YAML.safe_load File.read(path)
+      @config = YAML.safe_load ERB.new(File.read(path)).result
     end
 
     def host
