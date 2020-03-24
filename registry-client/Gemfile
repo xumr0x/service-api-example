@@ -6,4 +6,3 @@ gemspec
 
 gem 'minitest'
 gem 'mock_redis'
-gem 'redis'
