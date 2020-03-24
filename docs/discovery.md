@@ -194,12 +194,11 @@ In this step you need to test both methods (`register()` and `service()`), think
 Now that you have a working registry client, it is time to put it to use.
 
 - Update your `Gemfile` of your services and do a `bundle`
-  - For instance:
+  - `Gemfile`:
 
   ```Gemfile
   # Add the following line to the file.
-  # Replace the `git` with your own repo.
-  gem 'registry_client', git: 'https://github.com/hojulian/service-api-example.git', branch: 'master', glob: 'registry-client/*.gemspec'
+  gem 'registry_client', path: '../registry-client'
   ```
 
 - Replace all environment variables lookups with `client.service(...)`
